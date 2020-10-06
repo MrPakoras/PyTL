@@ -9,7 +9,7 @@ import os
 
 pg.init()
 
-gameDisplay = pg.display.set_mode((540,960))
+window = pg.display.set_mode((540,960))
 pg.display.set_caption('PyTL - Tier List Maker in Python [v0]')
 clock = pg.time.Clock()
 
@@ -44,19 +44,34 @@ while not crashed:
     
     # Class for each row of a tier
 	class tier:
-		def __init__():
-			pass
-		def rank(self, n, name, colour): # Left side that has the position/name/colour of tier
-			self.name = defranks[n] # Pygame textbox input field to enter name
-			self.colour = (defcols[n]) # RGB tuple to select colour
-		def imgbox(): # Right side where images are to be placed
-			pass
+		def __init__(self, n, name=None, colour=None): # Arg=something - Default parameter for argument
+			self.n = n
 
+			if name is None: # If parameter is None, then set default value
+				name = defranks[n]
+			if colour is None:
+				colour = defcols[n]
 
-	
+			self.name = name # Pygame textbox input field to enter name
+			self.colour = colour # RGB tuple to select colour
+
+			
+
+			#pygame.draw.rect()
+			surf = pg.Surface([100, 200])
+			window.blit(surf, (0,0)) # Draws surface at coords (tuple)
+			surf.fill(colour)
+
+		def imgbox(self): # Right side where images are to be placed
+			pass
+		
+		# Example Tier when name/colour are specified: tier(None,'Top Tier',(122, 202, 65)) - pass None to n
+
+	tier(0)
+
+	window.fill((255, 255, 255))
 	pg.display.update()
-
-	clock.tick(60)
+	clock.tick(60) # 60fps
 
 
 pg.quit()
