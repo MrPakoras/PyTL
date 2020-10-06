@@ -27,6 +27,8 @@ for dirName, subdirList, fileList in os.walk(rootdir):
 			os.rename(wp,n) # Replaces file with renamed file
 			print('>> Renamed'+wp+' to '+n)
 			nth += 1
+		else:
+			pass
 print('\n>> '+str(nth)+' files renamed.\n\n')
 
 
