@@ -32,8 +32,9 @@ for dirName, subdirList, fileList in os.walk(rootdir):
 print('\n>> '+str(nth)+' files renamed.\n\n')
 
 # Class for each row of a tier
-class tier:
+class Tier():
 	def __init__(self, n, name=None, colour=None): # Arg=something - Default parameter for argument
+
 		self.n = n
 
 		if name is None: # If parameter is None, then set default value
@@ -44,34 +45,32 @@ class tier:
 		self.name = name # Pygame textbox input field to enter name
 		self.colour = colour # RGB tuple to select colour
 
-		
-
-		#pygame.draw.rect()
-		self.surf = pg.Surface([100, 200])
+		self.surf = pg.Surface((100, 200))
 		self.surf.fill(colour)
-		
-
-	def imgbox(self): # Right side where images are to be placed
-		pass
 	
 	# Example Tier when name/colour are specified: tier(None,'Top Tier',(122, 202, 65)) - pass None to n
+	# Changing tier attributes: tier(n).colour or tier(n).name
 
-t1 = tier(0)
-print(t1.colour)
+t = Tier(0)
+print(t.colour)
 
 # Game
 crashed = False
 
 while not crashed:
+	
+	window.fill((255, 255, 255)) # Needs to be drawn above surfaces
+
 	for event in pg.event.get():
 		if event.type == pg.QUIT:
 			crashed = True
 
 		print(event)
     
-	window.blit(t1.surf, (0,0)) # Draws surface at coords (tuple)
 	
-	window.fill((255, 255, 255))
+	
+	
+	window.blit(t.surf, (0,0)) # Draws surface at coords (tuple)
 	pg.display.update()
 	clock.tick(60) # 60fps
 

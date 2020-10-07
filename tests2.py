@@ -6,10 +6,18 @@ window = pg.display.set_mode((540,960))
 pg.display.set_caption('PyTL - Tier List Maker in Python [v0]')
 clock = pg.time.Clock()
 
+defcols = [(134, 52, 235),(52, 89, 235),(52, 235, 147),(235, 235, 52),(235, 156, 52),(235, 79, 52)] # Default colours for tiers
 
-surf = pg.Surface([100, 200])
-surf.fill((120,203,65))
+class tier:
+	def __init__(self, n, colour=None):
 
+		if colour is None:
+			colour = defcols[n]
+
+		self.surf = pg.Surface((100, 200))
+		self.surf.fill(colour)
+
+t = tier(2)
 
 crashed = False
 
@@ -23,7 +31,7 @@ while not crashed:
 
 
 	window.fill((255, 255, 255))
-	window.blit(surf, (0,0))
+	window.blit(t.surf, (0,0))
 	pg.display.update()
 	clock.tick(60) # 60fps
 
