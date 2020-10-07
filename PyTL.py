@@ -31,6 +31,33 @@ for dirName, subdirList, fileList in os.walk(rootdir):
 			pass
 print('\n>> '+str(nth)+' files renamed.\n\n')
 
+# Class for each row of a tier
+class tier:
+	def __init__(self, n, name=None, colour=None): # Arg=something - Default parameter for argument
+		self.n = n
+
+		if name is None: # If parameter is None, then set default value
+			name = defranks[n]
+		if colour is None:
+			colour = defcols[n]
+
+		self.name = name # Pygame textbox input field to enter name
+		self.colour = colour # RGB tuple to select colour
+
+		
+
+		#pygame.draw.rect()
+		self.surf = pg.Surface([100, 200])
+		self.surf.fill(colour)
+		
+
+	def imgbox(self): # Right side where images are to be placed
+		pass
+	
+	# Example Tier when name/colour are specified: tier(None,'Top Tier',(122, 202, 65)) - pass None to n
+
+t1 = tier(0)
+print(t1.colour)
 
 # Game
 crashed = False
@@ -42,33 +69,8 @@ while not crashed:
 
 		print(event)
     
-    # Class for each row of a tier
-	class tier:
-		def __init__(self, n, name=None, colour=None): # Arg=something - Default parameter for argument
-			self.n = n
-
-			if name is None: # If parameter is None, then set default value
-				name = defranks[n]
-			if colour is None:
-				colour = defcols[n]
-
-			self.name = name # Pygame textbox input field to enter name
-			self.colour = colour # RGB tuple to select colour
-
-			
-
-			#pygame.draw.rect()
-			surf = pg.Surface([100, 200])
-			window.blit(surf, (0,0)) # Draws surface at coords (tuple)
-			surf.fill(colour)
-
-		def imgbox(self): # Right side where images are to be placed
-			pass
-		
-		# Example Tier when name/colour are specified: tier(None,'Top Tier',(122, 202, 65)) - pass None to n
-
-	tier(0)
-
+	window.blit(t1.surf, (0,0)) # Draws surface at coords (tuple)
+	
 	window.fill((255, 255, 255))
 	pg.display.update()
 	clock.tick(60) # 60fps
