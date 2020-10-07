@@ -31,10 +31,12 @@ for dirName, subdirList, fileList in os.walk(rootdir):
 			pass
 print('\n>> '+str(nth)+' files renamed.\n\n')
 
+tiers = 0
+
 # Class for each row of a tier
 class Tier():
 	def __init__(self, n, name=None, colour=None): # Arg=something - Default parameter for argument
-
+		tiers += 1 # Is there a way of counting the number of objects created?
 		self.n = n
 
 		if name is None: # If parameter is None, then set default value
@@ -58,7 +60,7 @@ print(t.colour)
 crashed = False
 
 while not crashed:
-	
+
 	window.fill((255, 255, 255)) # Needs to be drawn above surfaces
 
 	for event in pg.event.get():
