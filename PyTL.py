@@ -5,7 +5,7 @@
 # > Image can be exported
 
 import pygame as pg
-import os
+import os, math
 
 pg.init()
 
@@ -55,7 +55,7 @@ class Tier():
 	# Example Tier when name/colour are specified: tier(None,'Top Tier',(122, 202, 65)) - pass None to n
 	# Changing tier attributes: tier(n).colour or tier(n).name
 
-tlist = [Tier(0),Tier(1)]
+tlist = [Tier(0), Tier(1), Tier(2), Tier(3), Tier(4), Tier(5)]
 #print(t.colour)
 
 # Game
@@ -71,7 +71,7 @@ while not crashed:
 
 		print(event)
    
-	[window.blit(x.surf, (0,0+tlist.index(x)*200)) for x in tlist] # Draws surface at coords (tuple), which is below each previous surface
+	[window.blit(x.surf, (0,0+tlist.index(x)*math.floor(960/len(tlist)))) for x in tlist] # Draws surface at coords (tuple), which is below each previous surface
 	pg.display.update()
 	clock.tick(60) # 60fps
 
