@@ -8,8 +8,8 @@ import pygame as pg
 import os, math
 
 pg.init()
-
-window = pg.display.set_mode((540,960))
+width, height = 540, 960
+window = pg.display.set_mode((width, height))
 pg.display.set_caption('PyTL - Tier List Maker in Python [v0]')
 clock = pg.time.Clock()
 
@@ -49,8 +49,12 @@ class Tier():
 		self.name = name # Pygame textbox input field to enter name
 		self.colour = colour # RGB tuple to select colour
 
-		self.surf = pg.Surface((100, 200))
-		self.surf.fill(colour)
+		self.rankbox = pg.Surface((100, 200))
+		self.rankbox.fill(colour)
+
+		self.imgbox = pg.Surface((width-100,200))
+		self.imgbox.fill(colour)
+
 	
 	# Example Tier when name/colour are specified: tier(None,'Top Tier',(122, 202, 65)) - pass None to n
 	# Changing tier attributes: tier(n).colour or tier(n).name
@@ -69,9 +73,12 @@ while not crashed:
 		if event.type == pg.QUIT:
 			crashed = True
 
-		print(event)
+		#print(event)
    
-	[window.blit(x.surf, (0,0+tlist.index(x)*math.floor(960/len(tlist)))) for x in tlist] # Draws surface at coords (tuple), which is below each previous surface
+	[window.blit(x.rankbox, (0,0+tlist.index(x)*math.floor(height/len(tlist)))) for x in tlist] # Draws surface at coords (tuple), which is below each previous surface
+	# ^^ Draw surface for surface in list of Tiers, at position below previous surface, and adjust height so all frrames fit on window
+	[window.blit(x.imgbox, (100,0+tlist.index(x)*math.floor(height/len(tlist)))) for x in tlist]
+	# Same as above but for imgboxes
 	pg.display.update()
 	clock.tick(60) # 60fps
 
