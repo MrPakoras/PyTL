@@ -31,11 +31,13 @@ for dirName, subdirList, fileList in os.walk(rootdir):
 			pass
 print('\n>> '+str(nth)+' files renamed.\n\n')
 
+global tiers
 tiers = 0
 
 # Class for each row of a tier
 class Tier():
 	def __init__(self, n, name=None, colour=None): # Arg=something - Default parameter for argument
+		global tiers
 		tiers += 1 # Is there a way of counting the number of objects created?
 		self.n = n
 
@@ -53,8 +55,8 @@ class Tier():
 	# Example Tier when name/colour are specified: tier(None,'Top Tier',(122, 202, 65)) - pass None to n
 	# Changing tier attributes: tier(n).colour or tier(n).name
 
-t = Tier(0)
-print(t.colour)
+tlist = [Tier(0),Tier(1)]
+#print(t.colour)
 
 # Game
 crashed = False
@@ -68,11 +70,8 @@ while not crashed:
 			crashed = True
 
 		print(event)
-    
-	
-	
-	
-	window.blit(t.surf, (0,0)) # Draws surface at coords (tuple)
+   
+	[window.blit(x.surf, (0,0+tlist.index(x)*200)) for x in tlist] # Draws surface at coords (tuple), which is below each previous surface
 	pg.display.update()
 	clock.tick(60) # 60fps
 
