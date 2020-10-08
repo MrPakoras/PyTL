@@ -1,4 +1,4 @@
-import random, os
+import random, os, math
 import pygame as pg
 
 # z = [(0,0,0),(1,1,1)]
@@ -57,14 +57,19 @@ defranks = ['S', 'A', 'B', 'C', 'D', 'F'] # Default ranks for tiers
 # 	def imgbox(): # Right side where images are to be placed
 # 		pass
 
-class tier:
-	def __init__(self, n, name=None, colour=None):
-		self.n = n
+# class tier:
+# 	def __init__(self, n, name=None, colour=None):
+# 		self.n = n
 
-		if name is None: # If parameter is None, then set default value
-			name = defranks[n]
-		if colour is None:
-			colour = defcols[n]
+# 		if name is None: # If parameter is None, then set default value
+# 			name = defranks[n]
+# 		if colour is None:
+# 			colour = defcols[n]
 
-		self.name = name # Pygame textbox input field to enter name
-		self.colour = colour # RGB tuple to select colour
+# 		self.name = name # Pygame textbox input field to enter name
+# 		self.colour = colour # RGB tuple to select colour
+
+col = (12,123,234)
+col2 = []
+[col2.append(math.floor(x*0.5)) for x in col]
+print(tuple(col2))

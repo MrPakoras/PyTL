@@ -10,6 +10,7 @@ import os, math
 pg.init()
 width, height = 540, 960
 window = pg.display.set_mode((width, height))
+#window = pg.display.set_mode(size, pg.RESIZEABLE)
 pg.display.set_caption('PyTL - Tier List Maker in Python [v0]')
 clock = pg.time.Clock()
 
@@ -49,11 +50,18 @@ class Tier():
 		self.name = name # Pygame textbox input field to enter name
 		self.colour = colour # RGB tuple to select colour
 
-		self.rankbox = pg.Surface((100, 200))
+		self.rankbox = pg.Surface((100, 200)) # Surface for tier ranks
 		self.rankbox.fill(colour)
 
-		self.imgbox = pg.Surface((width-100,200))
-		self.imgbox.fill(colour)
+		font = pg.font.Font('freesansbold.ttf', 32)
+		self.text = font.render(name, True, (0,0,0)) # Text layer
+
+		colour2 = []
+		[colour2.append(math.floor(x*0.2)) for x in colour] # Reduce each element in colour tuple by half
+		colour2 = tuple(colour2) # Convert list back into tuple
+
+		self.imgbox = pg.Surface((width-100,200)) # Surface for images to be placed in
+		self.imgbox.fill(colour2)
 
 	
 	# Example Tier when name/colour are specified: tier(None,'Top Tier',(122, 202, 65)) - pass None to n
@@ -77,6 +85,7 @@ while not crashed:
    
 	[window.blit(x.rankbox, (0,0+tlist.index(x)*math.floor(height/len(tlist)))) for x in tlist] # Draws surface at coords (tuple), which is below each previous surface
 	# ^^ Draw surface for surface in list of Tiers, at position below previous surface, and adjust height so all frrames fit on window
+	#[window.blit(x.text, x.rankbox) for x in tlist] # Text on Tier rank
 	[window.blit(x.imgbox, (100,0+tlist.index(x)*math.floor(height/len(tlist)))) for x in tlist]
 	# Same as above but for imgboxes
 	pg.display.update()
