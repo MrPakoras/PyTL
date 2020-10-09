@@ -4,6 +4,9 @@
 # > Save file (can be imported to be updated)
 # > Image can be exported
 
+# // Integer division is much faster than math.floor() apparently
+# https://stackoverflow.com/questions/40777772/python-integer-division-operator-vs-math-floor
+
 import pygame as pg
 import os, math
 
@@ -55,6 +58,7 @@ class Tier():
 		if colour is None:
 			colour = defcols[n]
 		else:
+			pass
 
 		self.name = name # Pygame textbox input field to enter name
 		self.colour = colour # RGB tuple to select colour
@@ -67,7 +71,7 @@ class Tier():
 		self.text = font.render(name, True, (0,0,0)) # Text layer
 
 		colour2 = []
-		[colour2.append(math.floor(x*0.2)) for x in colour]# Reduce each element in colour tuple by half
+		[colour2.append((2*x)//10) for x in colour]# Reduce each element in colour tuple by half
 		colour2 = tuple(colour2) # Convert list back into tuple
 
 		# colour2 = list(colour)
@@ -107,10 +111,10 @@ while not crashed:
 
 		#print(event)
    
-	[window.blit(x.rankbox, (0,0+tlist.index(x)*math.floor(height/len(tlist)))) for x in tlist] # Draws surface at coords (tuple), which is below each previous surface
+	[window.blit(x.rankbox, (0,0+tlist.index(x)*height//len(tlist))) for x in tlist] # Draws surface at coords (tuple), which is below each previous surface
 	# ^^ Draw surface for surface in list of Tiers, at position below previous surface, and adjust height so all frrames fit on window
 	#[window.blit(x.text, x.rankbox) for x in tlist] # Text on Tier rank
-	[window.blit(x.imgbox, (100,0+tlist.index(x)*math.floor(height/len(tlist)))) for x in tlist]
+	[window.blit(x.imgbox, (100,0+tlist.index(x)*height//len(tlist))) for x in tlist]
 	# Same as above but for imgboxes
 
 	window.blit(pickbox, (width-300, 0)) # Draws surface for images to be loaded into
