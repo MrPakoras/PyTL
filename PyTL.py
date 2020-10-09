@@ -17,8 +17,11 @@ clock = pg.time.Clock()
 defcols = [(134, 52, 235),(52, 89, 235),(52, 235, 147),(235, 235, 52),(235, 156, 52),(235, 79, 52)] # Default colours for tiers
 defranks = ['S', 'A', 'B', 'C', 'D', 'F'] # Default ranks for tiers
 
+
 # Converting from .webp from MAL asset download to .jpg
 nth = 0
+imgfiles = 0
+
 rootdir = './images/'
 for dirName, subdirList, fileList in os.walk(rootdir):
 	for fname in fileList:
@@ -28,12 +31,17 @@ for dirName, subdirList, fileList in os.walk(rootdir):
 			os.rename(wp,n) # Replaces file with renamed file
 			print('>> Renamed'+wp+' to '+n)
 			nth += 1
+			imgfiles += 1 # Number of images to import
+		elif fname.endswith('.jpg'):
+			imgfiles += 1
+
 		else:
 			pass
-print('\n>> '+str(nth)+' files renamed.\n\n')
-
+print('\n>> '+str(nth)+' files renamed.')
+print('>> Number of Images:   '+str(imgfiles)+'\n\n')
 global tiers
 tiers = 0
+
 
 # Class for each row of a tier
 class Tier():
@@ -46,9 +54,11 @@ class Tier():
 			name = defranks[n]
 		if colour is None:
 			colour = defcols[n]
+		else:
 
 		self.name = name # Pygame textbox input field to enter name
 		self.colour = colour # RGB tuple to select colour
+
 
 		self.rankbox = pg.Surface((100, 200)) # Surface for tier ranks
 		self.rankbox.fill(colour)
@@ -60,24 +70,36 @@ class Tier():
 		[colour2.append(math.floor(x*0.2)) for x in colour]# Reduce each element in colour tuple by half
 		colour2 = tuple(colour2) # Convert list back into tuple
 
+		# colour2 = list(colour)
+		# colour2.append(0.1) # Adding alpha channel
+		# colour2 = tuple(colour2)
+
 		self.imgbox = pg.Surface((width-400,200)) # Surface for images to be placed in
 		self.imgbox.fill(colour2)
 	
 	# Example Tier when name/colour are specified: tier(None,'Top Tier',(122, 202, 65)) - pass None to n
 	# Changing tier attributes: tier(n).colour or tier(n).name
 
+
+### Class for all the image tiles
+class cards: # Gonna call them 'cards' so I dont get confused with all the image variables lol
+	def __init__(self, image):
+		pass
+
+
 pickbox = pg.Surface((300, height)) # Surface for images to load into and picked from
 pickbox.fill((30, 30, 30))
 
-tlist = [Tier(0), Tier(1), Tier(2), Tier(3), Tier(4), Tier(5)]
-#print(t.colour)
 
-# Game
+tlist = [Tier(y) for y in range(6)]
+
+
+### Game Loop
 crashed = False
 
 while not crashed:
 
-	window.fill((255, 255, 255)) # Needs to be drawn above surfaces
+	window.fill((0, 0, 0)) # Needs to be drawn above surfaces
 
 	for event in pg.event.get():
 		if event.type == pg.QUIT:
@@ -91,7 +113,14 @@ while not crashed:
 	[window.blit(x.imgbox, (100,0+tlist.index(x)*math.floor(height/len(tlist)))) for x in tlist]
 	# Same as above but for imgboxes
 
-	window.blit(pickbox, (width-300, 0))
+	window.blit(pickbox, (width-300, 0)) # Draws surface for images to be loaded into
+
+	# recno = 0 # Rectangle number (counts rectangles drawn)
+	# for loop in range(imgfiles):
+	# 	rprop = 
+	# 	pg.draw.rect(pickbox,(50,50,50),rprop)
+
+	
 	pg.display.update()
 	clock.tick(60) # 60fps
 
