@@ -8,7 +8,7 @@ import pygame as pg
 import os, math
 
 pg.init()
-width, height = 540, 960
+width, height = 840, 960
 window = pg.display.set_mode((width, height))
 #window = pg.display.set_mode(size, pg.RESIZEABLE)
 pg.display.set_caption('PyTL - Tier List Maker in Python [v0]')
@@ -57,15 +57,17 @@ class Tier():
 		self.text = font.render(name, True, (0,0,0)) # Text layer
 
 		colour2 = []
-		[colour2.append(math.floor(x*0.2)) for x in colour] # Reduce each element in colour tuple by half
+		[colour2.append(math.floor(x*0.2)) for x in colour]# Reduce each element in colour tuple by half
 		colour2 = tuple(colour2) # Convert list back into tuple
 
-		self.imgbox = pg.Surface((width-100,200)) # Surface for images to be placed in
+		self.imgbox = pg.Surface((width-400,200)) # Surface for images to be placed in
 		self.imgbox.fill(colour2)
-
 	
 	# Example Tier when name/colour are specified: tier(None,'Top Tier',(122, 202, 65)) - pass None to n
 	# Changing tier attributes: tier(n).colour or tier(n).name
+
+pickbox = pg.Surface((300, height)) # Surface for images to load into and picked from
+pickbox.fill((30, 30, 30))
 
 tlist = [Tier(0), Tier(1), Tier(2), Tier(3), Tier(4), Tier(5)]
 #print(t.colour)
@@ -88,6 +90,8 @@ while not crashed:
 	#[window.blit(x.text, x.rankbox) for x in tlist] # Text on Tier rank
 	[window.blit(x.imgbox, (100,0+tlist.index(x)*math.floor(height/len(tlist)))) for x in tlist]
 	# Same as above but for imgboxes
+
+	window.blit(pickbox, (width-300, 0))
 	pg.display.update()
 	clock.tick(60) # 60fps
 
