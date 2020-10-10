@@ -14,7 +14,7 @@ pg.init()
 width, height = 840, 960
 window = pg.display.set_mode((width, height))
 #window = pg.display.set_mode(size, pg.RESIZEABLE)
-pg.display.set_caption('PyTL - Tier List Maker in Python [v0]')
+pg.display.set_caption('PyTL - Tier List Maker in Python [v0.3]')
 clock = pg.time.Clock()
 
 defcols = [(134, 52, 235),(52, 89, 235),(52, 235, 147),(235, 235, 52),(235, 156, 52),(235, 79, 52)] # Default colours for tiers
@@ -86,7 +86,7 @@ class Tier():
 
 
 ### Class for all the image tiles
-class cards: # Gonna call them 'cards' so I dont get confused with all the image variables lol
+class Cards(pygame.sprite.Sprite): # Gonna call them 'cards' so I dont get confused with all the image variables lol
 	def __init__(self, image):
 		pass
 
@@ -95,7 +95,7 @@ pickbox = pg.Surface((300, height)) # Surface for images to load into and picked
 pickbox.fill((30, 30, 30))
 
 
-tlist = [Tier(y) for y in range(6)]
+tlist = [Tier(y) for y in range(6)] # List of Tier objects
 
 
 ### Game Loop
@@ -108,8 +108,10 @@ while not crashed:
 	for event in pg.event.get():
 		if event.type == pg.QUIT:
 			crashed = True
-
-		#print(event)
+		# elif event.type == pg.MOUSEBUTTONDOWN:
+		# 	if :# Check if mouse is over card sprite
+		#		mx, my = pg.mouse.get_pos()
+		# 		# Sprite .blit(window,(mx,my))
    
 	[window.blit(x.rankbox, (0,0+tlist.index(x)*height//len(tlist))) for x in tlist] # Draws surface at coords (tuple), which is below each previous surface
 	# ^^ Draw surface for surface in list of Tiers, at position below previous surface, and adjust height so all frrames fit on window
@@ -124,7 +126,8 @@ while not crashed:
 	# 	rprop = 
 	# 	pg.draw.rect(pickbox,(50,50,50),rprop)
 
-	
+	for event in pg
+
 	pg.display.update()
 	clock.tick(60) # 60fps
 
