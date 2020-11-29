@@ -86,7 +86,7 @@ class Tier():
 
 
 ### Class for all the image tiles
-class Cards(pygame.sprite.Sprite): # Gonna call them 'cards' so I dont get confused with all the image variables lol
+class Cards(pg.sprite.Sprite): # Gonna call them 'cards' so I dont get confused with all the image variables lol
 	def __init__(self, image):
 		pass
 
@@ -126,7 +126,7 @@ while not crashed:
 	# 	rprop = 
 	# 	pg.draw.rect(pickbox,(50,50,50),rprop)
 
-	for event in pg
+	#for event in pg
 
 	pg.display.update()
 	clock.tick(60) # 60fps
