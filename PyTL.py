@@ -12,7 +12,7 @@ import os, math
 
 pg.init()
 width, height = 840, 960
-window = pg.display.set_mode((width, height))
+window = pg.display.set_mode((width, height), pg.RESIZEABLE)
 #window = pg.display.set_mode(size, pg.RESIZEABLE)
 pg.display.set_caption('PyTL - Tier List Maker in Python [v0.3]')
 clock = pg.time.Clock()
@@ -28,20 +28,9 @@ imgfiles = 0
 rootdir = './images/'
 for dirName, subdirList, fileList in os.walk(rootdir):
 	for fname in fileList:
-		if fname.endswith('.webp'):
-			wp = rootdir+fname
-			n = rootdir+fname.replace('.webp','.jpg')
-			os.rename(wp,n) # Replaces file with renamed file
-			print('>> Renamed'+wp+' to '+n)
-			nth += 1
-			imgfiles += 1 # Number of images to import
-		elif fname.endswith('.jpg'):
+		if fname.endswith('.jpg'):
 			imgfiles += 1
 
-		else:
-			pass
-print('\n>> '+str(nth)+' files renamed.')
-print('>> Number of Images:   '+str(imgfiles)+'\n\n')
 global tiers
 tiers = 0
 
