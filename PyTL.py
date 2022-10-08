@@ -12,7 +12,7 @@ import os, math
 
 pg.init()
 width, height = 840, 960
-window = pg.display.set_mode((width, height), pg.RESIZEABLE)
+window = pg.display.set_mode((width, height), pg.RESIZABLE)
 #window = pg.display.set_mode(size, pg.RESIZEABLE)
 pg.display.set_caption('PyTL - Tier List Maker in Python [v0.3]')
 clock = pg.time.Clock()
